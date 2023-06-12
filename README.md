@@ -5,7 +5,7 @@ There are 4 scripts in total:
 
 1)  slackware2freenix.sh
 
-This is a meta-script that just runs the other three without any arguments.
+This is a meta-script that just runs the other three with necessary arguments.
 Needs to be run as root.
 
 
