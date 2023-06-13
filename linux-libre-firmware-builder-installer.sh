@@ -34,9 +34,9 @@ BLACKLISTFILE=${BLACKLISTFILE:-'/etc/slackpkg/blacklist'}
 INSTALL_FIRMWARE=${INSTALL_FIRMWARE:-'no'}
 
 # download linux-libre firmware
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% Downloading Linux-Libre firmware"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% Downloading Linux-Libre firmware'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 
 rm -r ${BUILDDIR}/firmware
 mkdir ${BUILDDIR}/firmware
@@ -48,9 +48,9 @@ chmod a+x kernel-firmware-gnu.SlackBuild
 
 # patch SlackBuild and slack-desc to fit linux-libre-firmware using:
 # sed -i 's/ --- / --- /' slack-desc
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% Patching SlackBuild and slack-desc files for linux-libre"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% Patching SlackBuild and slack-desc files for linux-libre'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 # patch kernel-firmware.SlackBuild
 sed -i 's/PKGNAM=kernel-firmware/PKGNAM=kernel-firmware-gnu/' kernel-firmware-gnu.SlackBuild
 sed -i 's/.*git.kernel.org\/pub\/scm\/linux\/kernel\/git\/firmware\/linux-firmware.git\/commit\/?id=HEAD | grep "   committer " | head -n 1 | rev | cut -f 3 -d.*/  DATE="$(lynx -dump -width=256 https:\/\/jxself.org\/git\/linux-libre-firmware.git | grep "last change" | head -n 1 | cut -f 2 -d "," |  cut -d" " -f2-4 | tr -d " ")"/' kernel-firmware-gnu.SlackBuild
@@ -66,18 +66,18 @@ sed -i 's/Linux/Linux-libre/' slack-desc
 sed -i 's/git.kernel.org\/pub\/scm\/linux\/kernel\/git\/firmware\/linux-firmware.git/jxself.org\/git\/linux-libre-firmware.git/' slack-desc
 
 # build firmware package
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% Building Linux-Libre firmware"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% Building Linux-Libre firmware'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 
 TMP=${BUILDDIR}/firmware ./kernel-firmware-gnu.SlackBuild
 
 if [ $INSTALL_FIRMWARE == 'no' ]; then
 
 # that should do it!
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% Linux-libre firmware has been built."
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% Linux-libre firmware has been built.'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 cd ${CWD0}
 
 exit 0
@@ -85,20 +85,20 @@ exit 0
 fi
 
 # Remove stock firmware package
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% Removing stock firmware package"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% Removing stock firmware package'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 removepkg kernel-firmware
 
 # install firmware package
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% Installing Linux-Libre firmware"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% Installing Linux-Libre firmware'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 
 installpkg ${BUILDDIR}/firmware/kernel-firmware-gnu*
 
 # Add non-free packages to blacklist if not already blacklisted
-if ! grep -q "kernel-firmware" $BLACKLISTFILE ; then
+if ! grep -q 'kernel-firmware' $BLACKLISTFILE ; then
 
 # Blacklist stock firmware package
 echo 'kernel-firmware' >> $BLACKLISTFILE

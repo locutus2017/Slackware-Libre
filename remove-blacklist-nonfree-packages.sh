@@ -18,7 +18,7 @@
 ####################################################################################
 
 # Set blacklist file, just in case...
-BLACKLISTFILE=${BLACKLISTFILE:-"/etc/slackpkg/blacklist"}
+BLACKLISTFILE=${BLACKLISTFILE:-'/etc/slackpkg/blacklist'}
 
 # Remove non-free stock packages from full stock installation
 # Comment out any you'd like to keep
@@ -38,36 +38,36 @@ removepkg \
   zd1211-firmware \
 
 # Add non-free packages to blacklist if not already blacklisted
-if ! grep -q "Non-free packages removed as per freenix.net" $BLACKLISTFILE ; then
+if ! grep -q 'Non-free packages removed as per freenix.net' $BLACKLISTFILE ; then
 
 # Comment out any to be excluded from blacklist
-echo "#" >> $BLACKLISTFILE
-echo "##############################################" >> $BLACKLISTFILE
-echo "# Non-free packages removed as per freenix.net" >> $BLACKLISTFILE
-echo "amp" >> $BLACKLISTFILE
-echo "bluez-firmware" >> $BLACKLISTFILE
-echo "font-bh-ttf" >> $BLACKLISTFILE
-echo "font-bh-type1" >> $BLACKLISTFILE
-echo "ipw2100-fw" >> $BLACKLISTFILE
-echo "ipw2200-fw" >> $BLACKLISTFILE
-echo "mozilla-firefox" >> $BLACKLISTFILE
-echo "mozilla-thunderbird" >> $BLACKLISTFILE
-echo "seamonkey" >> $BLACKLISTFILE
-echo "skkdic" >> $BLACKLISTFILE
-echo "unarj" >> $BLACKLISTFILE
-echo "xgames" >> $BLACKLISTFILE
-echo "zd1211-firmware" >> $BLACKLISTFILE
+echo '#' >> $BLACKLISTFILE
+echo '##############################################' >> $BLACKLISTFILE
+echo '# Non-free packages removed as per freenix.net' >> $BLACKLISTFILE
+echo 'amp' >> $BLACKLISTFILE
+echo 'bluez-firmware' >> $BLACKLISTFILE
+echo 'font-bh-ttf' >> $BLACKLISTFILE
+echo 'font-bh-type1' >> $BLACKLISTFILE
+echo 'ipw2100-fw' >> $BLACKLISTFILE
+echo 'ipw2200-fw' >> $BLACKLISTFILE
+echo 'mozilla-firefox' >> $BLACKLISTFILE
+echo 'mozilla-thunderbird' >> $BLACKLISTFILE
+echo 'seamonkey' >> $BLACKLISTFILE
+echo 'skkdic' >> $BLACKLISTFILE
+echo 'unarj' >> $BLACKLISTFILE
+echo 'xgames' >> $BLACKLISTFILE
+echo 'zd1211-firmware' > $BLACKLISTFILE
 
 fi
 
 # Print out new blacklist
 cat $BLACKLISTFILE
 
-# Prepare for kernel building
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% Non-free software is removed and blacklisted."
-echo "% To (re)build a libre kernel for your system, run: "
-echo "% ./linux-libre-kernel-builder-installer.sh"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+# All done, now for the kernels....
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% Non-free software is removed and blacklisted.'
+echo '% To (re)build a libre kernel for your system, run: '
+echo '% ./linux-libre-kernel-builder-installer.sh'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 
 exit 0

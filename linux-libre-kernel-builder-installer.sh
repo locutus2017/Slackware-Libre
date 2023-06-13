@@ -39,9 +39,9 @@ REPOURL=${REPOURL:-'https://mirrors.slackware.com'}
 STOCKVERSION=${STOCKVERSION:-$(wget -q -O - $REPOURL/slackware/slackware64-$RELEASE/patches/source/ | grep -o -P '(?<=>linux-).*(?=\/<)')}
 
 # download kernel SlackBuild scripts
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% Downloading stock kernel SlackBuild files."
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% Downloading stock kernel SlackBuild files.'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 wget $REPOURL/slackware/slackware64-$RELEASE/patches/source/linux-${STOCKVERSION}/kernel-generic.SlackBuild
 wget $REPOURL/slackware/slackware64-$RELEASE/patches/source/linux-${STOCKVERSION}/kernel-headers.SlackBuild
 wget $REPOURL/slackware/slackware64-$RELEASE/patches/source/linux-${STOCKVERSION}/kernel-modules.SlackBuild
@@ -57,11 +57,11 @@ sed -i 's/oldconfig/olddefconfig/' kernel-source.SlackBuild
 MAJORVERSION=${MAJORVERSION:-$(wget -q -O - $REPOURL/slackware/slackware64-$RELEASE/patches/source/ | grep -o -P '(?<=>linux-).*(?=\/<)' | sed 's/\.[^.]*$//')}
 
 # download latest Linux-Libre source in the same branch as the stock kernel
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% Downloading Linux-Libre source."
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-wget -r -l1 -np -nd "http://linux-libre.fsfla.org/pub/linux-libre/releases/LATEST-${MAJORVERSION}.N" -A "linux-libre-${MAJORVERSION}.*-gnu.tar.lz*"
-wget -r -l1 -np -nd "http://linux-libre.fsfla.org/pub/linux-libre/releases/LATEST-${MAJORVERSION}.N" -A "linux-libre-${MAJORVERSION}.*-gnu.tar.sign"
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% Downloading Linux-Libre source.'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+wget -r -l1 -np -nd 'http://linux-libre.fsfla.org/pub/linux-libre/releases/LATEST-${MAJORVERSION}.N' -A 'linux-libre-${MAJORVERSION}.*-gnu.tar.lz*'
+wget -r -l1 -np -nd 'http://linux-libre.fsfla.org/pub/linux-libre/releases/LATEST-${MAJORVERSION}.N' -A 'linux-libre-${MAJORVERSION}.*-gnu.tar.sign'
 wget http://linux-libre.fsfla.org/pub/linux-libre/SIGNING-KEY.linux-libre
 gpg --import SIGNING-KEY.linux-libre
 gpg --verify *tar.lz.sign
@@ -70,9 +70,9 @@ LIBREVERSION=${LIBREVERSION:-$(ls linux-libre-*-gnu.tar.lz | sed 's/[^0-9.]*//g'
 ln -s linux-libre-${LIBREVERSION}-gnu.tar.lz linux-${LIBREVERSION}.tar.lz
 
 # grab most recent stock kernel-configs and use them as latest libre-configs
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% Downloading stock kernel-configs for use with libre-kernel."
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% Downloading stock kernel-configs for use with libre-kernel.'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 mkdir kernel-configs
 cd kernel-configs
 wget $REPOURL/slackware/slackware64-$RELEASE/patches/source/linux-${STOCKVERSION}/kernel-configs/config-generic-${STOCKVERSION} -O config-generic-${LIBREVERSION}
@@ -84,9 +84,9 @@ wget $REPOURL/slackware/slackware64-$RELEASE/patches/source/linux-${STOCKVERSION
 cd ../
 
 # Grab slack-desc files for packaging later
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% Downloading slack-desc files for kernel-packages."
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% Downloading slack-desc files for kernel-packages.'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 mkdir slack-desc
 cd slack-desc
 wget $REPOURL/slackware/slackware64-$RELEASE/patches/source/linux-${STOCKVERSION}/slack-desc/slack-desc.kernel-generic-smp.i686
@@ -105,22 +105,22 @@ cd ../
 # Build Linux-Libre packages
 wget $REPOURL/slackware/slackware64-$RELEASE/patches/source/linux-${STOCKVERSION}/build-all-kernels.sh
 chmod +x build-all-kernels.sh
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% Now building the kernels using Pat's script, this may take some time."
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% Now building the kernels using Pat`s script, this may take some time.'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 INSTALL_PACKAGES=NO  ./build-all-kernels.sh
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% We're done with Pat's script. Thanks Pat!"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% We are done with Pat`s script. Thanks Pat!'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 
 if [ $INSTALL_KERNEL == 'no' ]; then
 
 # that should do it!
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% Linux-libre kernel packages have been built."
-echo "% The last step is to build the firmware package, do this by running:"
-echo "% ./linux-libre-firmware-builder-installer.sh"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% Linux-libre kernel packages have been built.'
+echo '% The last step is to build the firmware package, do this by running:'
+echo '% ./linux-libre-firmware-builder-installer.sh'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 cd ${CWD0}
 
 exit 0
@@ -128,31 +128,31 @@ exit 0
 fi
 
 # Upgrade kernel packages all at once
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% Upgrading stock kernel packages to libre kernel packages."
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% Upgrading stock kernel packages to libre kernel packages.'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 upgradepkg /tmp/output-*/kernel-*.t?z
 
 # Now generate new initrd and update the bootloader
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% Running genintird and lilo."
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% Running genintird and lilo.'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 geninitrd
 lilo
 
 # Add non-free packages to blacklist if not already blacklisted
-if ! grep -q "Kernel packages removed to prevent stock kernel being reinstalled" $BLACKLISTFILE ; then
+if ! grep -q 'Kernel packages removed to prevent stock kernel being reinstalled' $BLACKLISTFILE ; then
 
 # Blacklist stock kernel packages
-echo "#" >> $BLACKLISTFILE
-echo "###################################################################" >> $BLACKLISTFILE
-echo "# Kernel packages removed to prevent stock kernel being reinstalled" >> $BLACKLISTFILE
-echo "kernel-generic.*" >> $BLACKLISTFILE
-echo "kernel-headers.*" >> $BLACKLISTFILE
-echo "kernel-huge.*" >> $BLACKLISTFILE
-echo "kernel-modules.*" >> $BLACKLISTFILE
-echo "kernel-source" >> $BLACKLISTFILE
-echo "kernel.*" >> $BLACKLISTFILE
+echo '#' >> $BLACKLISTFILE
+echo '###################################################################' >> $BLACKLISTFILE
+echo '# Kernel packages removed to prevent stock kernel being reinstalled' >> $BLACKLISTFILE
+echo 'kernel-generic.*' >> $BLACKLISTFILE
+echo 'kernel-headers.*' >> $BLACKLISTFILE
+echo 'kernel-huge.*' >> $BLACKLISTFILE
+echo 'kernel-modules.*' >> $BLACKLISTFILE
+echo 'kernel-source' >> $BLACKLISTFILE
+echo 'kernel.*' >> $BLACKLISTFILE
 
 # Print out new blacklist
 cat $BLACKLISTFILE
@@ -160,11 +160,11 @@ cat $BLACKLISTFILE
 fi
 
 # that should do it!
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "% Stock kernel packages have been upgraded to libre kernel packages."
-echo "% The last step is to upgrade the firmware package, do this by running:"
-echo "% ./linux-libre-firmware-builder-installer.sh"
-echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
+echo '% Stock kernel packages have been upgraded to libre kernel packages.'
+echo '% The last step is to upgrade the firmware package, do this by running:'
+echo '% ./linux-libre-firmware-builder-installer.sh'
+echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 cd ${CWD0}
 
 exit 0
