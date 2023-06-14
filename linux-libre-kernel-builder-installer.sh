@@ -1,6 +1,6 @@
 #!/bin/bash
 #######################################################################
-# Slackware(64)-15.0 to Freenix(64)-15.0 script, part 2:
+# Slackware(64)-Libre script, part 2:
 # Linux-Libre kernel builder and package installer
 # written by krt@beauxbead.com / krt.beauxbead.com
 # Released under the WTFPL 2.0  http://www.wtfpl.net/
@@ -28,7 +28,7 @@ INSTALL_KERNEL=${INSTALL_KERNEL:-'no'}
 RELEASE=$(grep '^VERSION=' /etc/os-release | cut -d '=' -f 2 | sed 's/"//g')
 
 # prepare for kernel building
-BUILDDIR=${BUILDDIR:-'/tmp/linux-libre-4-freenix'}
+BUILDDIR=${BUILDDIR:-'/tmp/slackware-libre'}
 rm -r ${BUILDDIR}
 mkdir ${BUILDDIR}
 cd ${BUILDDIR}

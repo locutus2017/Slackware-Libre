@@ -1,9 +1,9 @@
-A project in the works to convert an installed Slackware-15.0 system into a Freenix-15.0 system.
-Both 64-bit and 32-bit versions can be converted.
+A project in the works to remove non-free packages from  an installed Slackware-15.0 system.
+Both 64-bit and 32-bit versions can be liberated.
 
 There are 4 scripts in total:
 
-#  slackware2freenix.sh
+#  slackware-libre.sh
 
 This is a meta-script that just runs the other three with necessary arguments.
 Needs to be run as root.
@@ -36,7 +36,7 @@ RELEASE = release version of Slackware (i.e. 15.0). Fetches from running system 
 
 REPOURL = URL of your preferred repo.  (default = https://mirrors.slackware.com)
 
-BUILDDIR = directory to build kernels in. (default =/tmp/linux-libre-4-freenix)
+BUILDDIR = directory to build kernels in. (default =/tmp/slackware-libre)
 
 BLACKLISTFILE = the location of your slackpkg blacklist file (default = /etc/slackpkg/blacklist)
 
@@ -54,7 +54,7 @@ RELEASE = release version of Slackware (i.e. 15.0). Fetches from running system 
 
 REPOURL = URL of your preferred repo.  (default = https://mirrors.slackware.com)
 
-BUILDDIR = directory to build kernels in. (default =/tmp/linux-libre-4-freenix)
+BUILDDIR = directory to build kernels in. (default =/tmp/slackware-libre)
 
 BLACKLISTFILE = the location of your slackpkg blacklist file (default = /etc/slackpkg/blacklist)
 

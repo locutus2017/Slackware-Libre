@@ -1,6 +1,6 @@
 #!/bin/bash
 ###################################################################################
-# Slackware(64)-15.0 to Freenix(64)-15.0 script, part 1:
+# Slackware(64)-Libre script, part 1:
 # Non-free package remover and blacklister
 # written by krt@beauxbead.com / krt.beauxbead.com
 # Released under the WTFPL 2.0  http://www.wtfpl.net/

@@ -1,6 +1,6 @@
 #!/bin/bash
 #######################################################################
-# Slackware(64)-15.0 to Freenix(64)-15.0 script, all three parts:
+# Slackware(64)-Libre script, all three parts:
 # Remove nonfree packages, build & install libre kernel & firmware
 # written by krt@beauxbead.com / krt.beauxbead.com
 # Released under the WTFPL 2.0  http://www.wtfpl.net/

@@ -1,6 +1,6 @@
 #!/bin/bash
 #######################################################################
-# Slackware(64)-15.0 to Freenix(64)-15.0 script, part 3
+# Slackware(64)-Libre script, part 3
 # Linux-Libre firmware builder and installer
 # written by krt@beauxbead.com / krt.beauxbead.com
 # Released under the WTFPL 2.0  http://www.wtfpl.net/
@@ -25,7 +25,7 @@ RELEASE=${RELEASE:-$(grep '^VERSION=' /etc/os-release | cut -d '=' -f 2 | sed 's
 REPOURL=${REPOURL:-'https://mirrors.slackware.com'}
 
 # prepare for kernel building
-BUILDDIR=${BUILDDIR:-'/tmp/linux-libre-4-freenix'}
+BUILDDIR=${BUILDDIR:-'/tmp/slackware-libre'}
 
 # Set blacklist file, just in case...
 BLACKLISTFILE=${BLACKLISTFILE:-'/etc/slackpkg/blacklist'}
