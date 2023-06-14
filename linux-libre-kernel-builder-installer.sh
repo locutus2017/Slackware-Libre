@@ -118,6 +118,7 @@ if [ $INSTALL_KERNEL == 'no' ]; then
 # that should do it!
 echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 echo '% Linux-libre kernel packages have been built.'
+echo '% Packages can be found in /tmp/output-*/, depending on your architecture.'
 echo '% The last step is to build the firmware package, do this by running:'
 echo '% ./linux-libre-firmware-builder-installer.sh'
 echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
