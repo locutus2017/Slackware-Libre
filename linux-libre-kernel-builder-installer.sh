@@ -54,14 +54,14 @@ sed -i 's/oldconfig/olddefconfig/' kernel-modules.SlackBuild
 sed -i 's/oldconfig/olddefconfig/' kernel-source.SlackBuild
 
 # use MAJORVERSION to change branches if you wish
-MAJORVERSION=$(wget -q -O - $REPOURL/slackware/slackware64-$RELEASE/patches/source/ | grep -o -P '(?<=>linux-).*(?=\/<)' | sed 's/\.[^.]*$//')
+MAJORVERSION=${MAJORVERSION:-$(wget -q -O - $REPOURL/slackware/slackware64-$RELEASE/patches/source/ | grep -o -P '(?<=>linux-).*(?=\/<)' | sed 's/\.[^.]*$//')}
 
 # download latest Linux-Libre source in the same branch as the stock kernel
 echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 echo '% Downloading Linux-Libre source.'
 echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
-wget -r -l1 -np -nd 'http://linux-libre.fsfla.org/pub/linux-libre/releases/LATEST-${MAJORVERSION}.N' -A 'linux-libre-${MAJORVERSION}.*-gnu.tar.lz*'
-wget -r -l1 -np -nd 'http://linux-libre.fsfla.org/pub/linux-libre/releases/LATEST-${MAJORVERSION}.N' -A 'linux-libre-${MAJORVERSION}.*-gnu.tar.sign'
+wget -r -l1 -np -nd "http://linux-libre.fsfla.org/pub/linux-libre/releases/LATEST-${MAJORVERSION}.N" -A "linux-libre-${MAJORVERSION}.*-gnu.tar.lz*"
+wget -r -l1 -np -nd "http://linux-libre.fsfla.org/pub/linux-libre/releases/LATEST-${MAJORVERSION}.N" -A "linux-libre-${MAJORVERSION}.*-gnu.tar.sign"
 wget http://linux-libre.fsfla.org/pub/linux-libre/SIGNING-KEY.linux-libre
 gpg --import SIGNING-KEY.linux-libre
 gpg --verify *tar.lz.sign
