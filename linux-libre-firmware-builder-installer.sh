@@ -39,6 +39,7 @@ echo '% Downloading Linux-Libre firmware'
 echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 
 rm -r ${BUILDDIR}/firmware
+mkdir ${BUILDDIR}
 mkdir ${BUILDDIR}/firmware
 cd ${BUILDDIR}/firmware
 wget $REPOURL/slackware/slackware64-$RELEASE/source/a/kernel-firmware/kernel-firmware.SlackBuild
