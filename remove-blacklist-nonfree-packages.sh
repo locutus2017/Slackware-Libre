@@ -56,7 +56,7 @@ echo 'seamonkey' >> $BLACKLISTFILE
 echo 'skkdic' >> $BLACKLISTFILE
 echo 'unarj' >> $BLACKLISTFILE
 echo 'xgames' >> $BLACKLISTFILE
-echo 'zd1211-firmware' > $BLACKLISTFILE
+echo 'zd1211-firmware' >> $BLACKLISTFILE
 
 fi
 
