@@ -25,7 +25,7 @@ INSTALL_KERNEL=${INSTALL_KERNEL:-'no'}
 
 # future proof the release version number
 # to-do:  make this work on -current?
-RELEASE=${RELEASE:-$(grep '^VERSION=' /etc/os-release | cut -d '=' -f 2 | sed 's/"//g')}
+RELEASE=$(grep '^VERSION=' /etc/os-release | cut -d '=' -f 2 | sed 's/"//g')
 
 # prepare for kernel building
 BUILDDIR=${BUILDDIR:-'/tmp/linux-libre-4-freenix'}
@@ -54,7 +54,7 @@ sed -i 's/oldconfig/olddefconfig/' kernel-modules.SlackBuild
 sed -i 's/oldconfig/olddefconfig/' kernel-source.SlackBuild
 
 # use MAJORVERSION to change branches if you wish
-MAJORVERSION=${MAJORVERSION:-$(wget -q -O - $REPOURL/slackware/slackware64-$RELEASE/patches/source/ | grep -o -P '(?<=>linux-).*(?=\/<)' | sed 's/\.[^.]*$//')}
+MAJORVERSION=$(wget -q -O - $REPOURL/slackware/slackware64-$RELEASE/patches/source/ | grep -o -P '(?<=>linux-).*(?=\/<)' | sed 's/\.[^.]*$//')
 
 # download latest Linux-Libre source in the same branch as the stock kernel
 echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
