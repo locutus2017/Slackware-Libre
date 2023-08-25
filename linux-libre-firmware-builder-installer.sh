@@ -60,16 +60,15 @@ sed -i 's/git:\/\/git.kernel.org\/pub\/scm\/linux\/kernel\/git\/firmware\/linux-
 sed -i 's/kernel-firmware-$/kernel-firmware-gnu-$/' kernel-firmware-gnu.SlackBuild
 sed -i 's/( cd linux-firmware/(cd linux-libre-firmware/' kernel-firmware-gnu.SlackBuild
 sed -i 's/kernel-firmware-${DATE}/kernel-firmware-gnu-${DATE}/' kernel-firmware-gnu.SlackBuild
+
+# Skip building ARM-based firmware, cross-compiler needed
+sed -i "/# Better determine these the same way as above./a sed -i 's/all: aica ath9k_htc atusb av7110 carl9170fw cis dsp56k isci keyspan_pda openfwwf usbdux/all: ath9k_htc carl9170fw cis dsp56k is<56k isci keyspan_pda openfwwf usbdux/' Makefile" kernel-firmware-gnu.SlackBuild
+
 # patch slack-desc
 sed -i 's/kernel-firmware/kernel-firmware-gnu/' slack-desc
 sed -i 's/kernel-firmware (Firmware for the kernel)/kernel-firmware-gnu (Firmware for the kernel)/' slack-desc
 sed -i 's/Linux/Linux-libre/' slack-desc
 sed -i 's/git.kernel.org\/pub\/scm\/linux\/kernel\/git\/firmware\/linux-firmware.git/jxself.org\/git\/linux-libre-firmware.git/' slack-desc
-
-cd package-kernel-firmware-gnu/linux-libre-firmware
-# patch Makefile to exclude ARM-based firmware, cross-compiler required
-sed -i 's/all: aica ath9k_htc atusb av7110 carl9170fw cis dsp56k isci keyspan_pda openfwwf usbdux/all: ath9k_htc carl9170fw cis dsp56k isci keyspan_pda openfwwf usbdux/' Makefile
-cd ../../
 
 # build firmware package
 echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
