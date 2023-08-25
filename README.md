@@ -71,4 +71,4 @@ arguments:
 
 - You may want to save or share these before clearing out /tmp/ .
 
-- You will need about 3GB-5GB of free space for the full build.
+- You will need about 10GB-12GB of free space for the full build.
