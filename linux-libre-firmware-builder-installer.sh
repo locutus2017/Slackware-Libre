@@ -59,6 +59,7 @@ sed -i 's/https:\/\/git.kernel.org\/pub\/scm\/linux\/kernel\/git\/firmware\/linu
 sed -i 's/git:\/\/git.kernel.org\/pub\/scm\/linux\/kernel\/git\/firmware\/linux-firmware.git/https:\/\/jxself.org\/git\/linux-libre-firmware.git/' kernel-firmware-gnu.SlackBuild
 sed -i 's/kernel-firmware-$/kernel-firmware-gnu-$/' kernel-firmware-gnu.SlackBuild
 sed -i 's/( cd linux-firmware/(cd linux-libre-firmware/' kernel-firmware-gnu.SlackBuild
+# leave out ARM-based firmware, cross-compiler required.  Build everything else
 sed -i 's/make DESTDIR=$PKG $INSTALLTARGET/make DESTDIR=$PKG a56 as31 ath9k_htc_toolchain ath9k_htc b43-tools carl9170fw-toolchain carl9170fw cis-tools cis dsp56k ihex2fw isci keyspan_pda openfwwf usbdux $INSTALLTARGET/' kernel-firmware-gnu.SlackBuild
 sed -i 's/kernel-firmware-${DATE}/kernel-firmware-gnu-${DATE}/' kernel-firmware-gnu.SlackBuild
 # patch slack-desc
