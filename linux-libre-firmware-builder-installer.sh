@@ -61,6 +61,7 @@ sed -i 's/kernel-firmware-$/kernel-firmware-gnu-$/' kernel-firmware-gnu.SlackBui
 sed -i 's/( cd linux-firmware/(cd linux-libre-firmware/' kernel-firmware-gnu.SlackBuild
 sed -i 's/kernel-firmware-${DATE}/kernel-firmware-gnu-${DATE}/' kernel-firmware-gnu.SlackBuild
 sed -i 's/make DESTDIR=$PKG $INSTALLTARGET/make all && make DESTDIR=$PKG $INSTALLTARGET/' kernel-firmware-gnu.SlackBuild
+sed -i '/echo "Running make DESTDIR=$PKG ${INSTALLTARGET}..."/a make all' kernel-firmware-gnu.SlackBuild
 
 # Skip building ARM-based firmware, cross-compiler needed
 sed -i "/# Better determine these the same way as above./a sed -i 's/all: aica ath9k_htc atusb av7110 carl9170fw cis dsp56k isci keyspan_pda openfwwf usbdux/all: ath9k_htc carl9170fw cis dsp56k ihex2fw isci keyspan_pda openfwwf usbdux/' linux-libre-firmware/Makefile" kernel-firmware-gnu.SlackBuild
