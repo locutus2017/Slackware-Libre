@@ -59,6 +59,7 @@ sed -i 's/https:\/\/git.kernel.org\/pub\/scm\/linux\/kernel\/git\/firmware\/linu
 sed -i 's/git:\/\/git.kernel.org\/pub\/scm\/linux\/kernel\/git\/firmware\/linux-firmware.git/https:\/\/jxself.org\/git\/linux-libre-firmware.git/' kernel-firmware-gnu.SlackBuild
 sed -i 's/kernel-firmware-$/kernel-firmware-gnu-$/' kernel-firmware-gnu.SlackBuild
 sed -i 's/( cd linux-firmware/(cd linux-libre-firmware/' kernel-firmware-gnu.SlackBuild
+sed -i 's/rm -rf linux-firmware/rm -rf linux-libre-firmware/' kernel-firmware-gnu.SlackBuild
 sed -i 's/kernel-firmware-${DATE}/kernel-firmware-gnu-${DATE}/' kernel-firmware-gnu.SlackBuild
 sed -i '/echo "Running make DESTDIR=$PKG ${INSTALLTARGET}..."/a make all' kernel-firmware-gnu.SlackBuild
 
