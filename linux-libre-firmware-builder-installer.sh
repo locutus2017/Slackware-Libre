@@ -60,7 +60,6 @@ sed -i 's/git:\/\/git.kernel.org\/pub\/scm\/linux\/kernel\/git\/firmware\/linux-
 sed -i 's/kernel-firmware-$/kernel-firmware-gnu-$/' kernel-firmware-gnu.SlackBuild
 sed -i 's/( cd linux-firmware/(cd linux-libre-firmware/' kernel-firmware-gnu.SlackBuild
 sed -i 's/kernel-firmware-${DATE}/kernel-firmware-gnu-${DATE}/' kernel-firmware-gnu.SlackBuild
-sed -i 's/make DESTDIR=$PKG $INSTALLTARGET/make all && make DESTDIR=$PKG $INSTALLTARGET/' kernel-firmware-gnu.SlackBuild
 sed -i '/echo "Running make DESTDIR=$PKG ${INSTALLTARGET}..."/a make all' kernel-firmware-gnu.SlackBuild
 
 # Skip building ARM-based firmware, cross-compiler needed
