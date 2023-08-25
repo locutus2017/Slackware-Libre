@@ -59,14 +59,17 @@ sed -i 's/https:\/\/git.kernel.org\/pub\/scm\/linux\/kernel\/git\/firmware\/linu
 sed -i 's/git:\/\/git.kernel.org\/pub\/scm\/linux\/kernel\/git\/firmware\/linux-firmware.git/https:\/\/jxself.org\/git\/linux-libre-firmware.git/' kernel-firmware-gnu.SlackBuild
 sed -i 's/kernel-firmware-$/kernel-firmware-gnu-$/' kernel-firmware-gnu.SlackBuild
 sed -i 's/( cd linux-firmware/(cd linux-libre-firmware/' kernel-firmware-gnu.SlackBuild
-# leave out ARM-based firmware, cross-compiler required.  Build everything else
-sed -i 's/make DESTDIR=$PKG $INSTALLTARGET/make DESTDIR=$PKG a56 as31 ath9k_htc_toolchain ath9k_htc b43-tools carl9170fw-toolchain carl9170fw cis-tools cis dsp56k ihex2fw isci keyspan_pda openfwwf usbdux $INSTALLTARGET/' kernel-firmware-gnu.SlackBuild
 sed -i 's/kernel-firmware-${DATE}/kernel-firmware-gnu-${DATE}/' kernel-firmware-gnu.SlackBuild
 # patch slack-desc
 sed -i 's/kernel-firmware/kernel-firmware-gnu/' slack-desc
 sed -i 's/kernel-firmware (Firmware for the kernel)/kernel-firmware-gnu (Firmware for the kernel)/' slack-desc
 sed -i 's/Linux/Linux-libre/' slack-desc
 sed -i 's/git.kernel.org\/pub\/scm\/linux\/kernel\/git\/firmware\/linux-firmware.git/jxself.org\/git\/linux-libre-firmware.git/' slack-desc
+
+cd package-kernel-firmware-gnu/linux-libre-firmware
+# patch Makefile to exclude ARM-based firmware, cross-compiler required
+sed -i 's/all: aica ath9k_htc atusb av7110 carl9170fw cis dsp56k isci keyspan_pda openfwwf usbdux/all: ath9k_htc carl9170fw cis dsp56k isci keyspan_pda openfwwf usbdux/' Makefile
+cd ../../
 
 # build firmware package
 echo '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
