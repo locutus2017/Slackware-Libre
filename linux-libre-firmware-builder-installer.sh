@@ -58,7 +58,8 @@ sed -i 's/.*git.kernel.org\/pub\/scm\/linux\/kernel\/git\/firmware\/linux-firmwa
 sed -i 's/https:\/\/git.kernel.org\/pub\/scm\/linux\/kernel\/git\/firmware\/linux-firmware.git\/commit\/?id=HEAD | grep "    commit   " | head -n 1 | cut -f 2 -d ] | cut -b 1-7/"https:\/\/jxself.org\/git\/?p=linux-libre-firmware.git;a=commit" | grep "   commit    " | head -n 1 | cut -b 14-20/' kernel-firmware-gnu.SlackBuild
 sed -i 's/git:\/\/git.kernel.org\/pub\/scm\/linux\/kernel\/git\/firmware\/linux-firmware.git/https:\/\/jxself.org\/git\/linux-libre-firmware.git/' kernel-firmware-gnu.SlackBuild
 sed -i 's/kernel-firmware-$/kernel-firmware-gnu-$/' kernel-firmware-gnu.SlackBuild
-sed -i 's/mv linux-firmware/mv linux-libre-firmware/' kernel-firmware-gnu.SlackBuild
+sed -i 's/( cd linux-firmware/(cd linux-libre-firmware/' kernel-firmware-gnu.SlackBuild
+sed -i 's/make DESTDIR=$PKG $INSTALLTARGET/make DESTDIR=$PKG a56 as31 ath9k_htc_toolchain ath9k_htc b43-tools carl9170fw-toolchain carl9170fw cis-tools cis dsp56k ihex2fw isci keyspan_pda openfwwf usbdux $INSTALLTARGET/' kernel-firmware-gnu.SlackBuild
 sed -i 's/kernel-firmware-${DATE}/kernel-firmware-gnu-${DATE}/' kernel-firmware-gnu.SlackBuild
 # patch slack-desc
 sed -i 's/kernel-firmware/kernel-firmware-gnu/' slack-desc
